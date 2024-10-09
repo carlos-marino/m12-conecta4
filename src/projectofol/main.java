@@ -96,7 +96,7 @@ public class main {
     public static void colocarFitxa(char[][] taulell, int columna, char jugador) {
         for (int i = taulell.length - 1; i >= 0; i--) {
             if (taulell[i][columna] == ' ') {
-                taulell[i][columna] = jugador;
+                taulell[i][columna] = jugador; 
                 break;
             }
         }
