@@ -43,35 +43,28 @@ public class main {
 
             colocarFitxa(taulell, columna, jugadorActual);
             imprimirTaulell(taulell);
-
-            
         }
-
-        scanner.close();  // Tancar l'scanner al final
+        scanner.close();  
     }
 
-    // Inicialitza el taulell amb espais buits
     public static void inicialitzarTaulell(char[][] taulell) {
         for (int i = 0; i < taulell.length; i++) {
             for (int j = 0; j < taulell[i].length; j++) {
-                taulell[i][j] = ' '; // Cambiar '-' por ' ' para un formato más limpio
+                taulell[i][j] = ' '; 
             }
         }
     }
 
-    // Mostra el taulell per pantalla amb el format desitjat
     public static void imprimirTaulell(char[][] taulell) {
         System.out.println();
 
-        // Imprimir les files del taulell amb separadors
-        for (int i = 0; i < taulell.length; i++) {  // Iterar de 0 a files-1
-            System.out.print(" " + (taulell.length - i) + " | "); // Ajustar la numeración
+        for (int i = 0; i < taulell.length; i++) { 
+            System.out.print(" " + (taulell.length - i) + " | "); 
             for (int j = 0; j < taulell[i].length; j++) {
                 System.out.print(taulell[i][j] + " | ");
             }
             System.out.println();
 
-            // Línia separadora
             System.out.print("   ");
             for (int j = 0; j < taulell[i].length; j++) {
                 System.out.print("----");
@@ -79,22 +72,19 @@ public class main {
             System.out.println("-");
         }
 
-        // Imprimir la numeració de les columnes
         System.out.print("   ");
         for (int j = 1; j <= taulell[0].length; j++) {
             System.out.print("  " + j + " ");
         }
-        System.out.println();
+        System.out.println(); 
     }
 
-    // Verifica si la columna seleccionada té espai
     public static boolean columnaValida(char[][] taulell, int columna) {
         if (columna < 0 || columna >= taulell[0].length) {
             System.out.println("Columna fora de rang. Torna a intentar-ho.");
             return false;
         }
 
-        // Comprova si la columna està plena
         if (taulell[0][columna] != ' ') {
             System.out.println("Columna plena. Torna a intentar-ho.");
             return false;
@@ -103,7 +93,6 @@ public class main {
         return true;
     }
 
-    // Col·loca la fitxa a la columna seleccionada
     public static void colocarFitxa(char[][] taulell, int columna, char jugador) {
         for (int i = taulell.length - 1; i >= 0; i--) {
             if (taulell[i][columna] == ' ') {
