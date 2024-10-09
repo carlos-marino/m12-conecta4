@@ -78,7 +78,7 @@ public class main {
             System.out.print("  " + j + " ");
         }
         System.out.println(); 
-    }
+    } 
 
      
     public static boolean columnaValida(char[][] taulell, int columna) {
