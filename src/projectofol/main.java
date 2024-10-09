@@ -55,6 +55,7 @@ public class main {
         }
     }
 
+    
     public static void imprimirTaulell(char[][] taulell) {
         System.out.println();
 
@@ -79,6 +80,7 @@ public class main {
         System.out.println(); 
     }
 
+     
     public static boolean columnaValida(char[][] taulell, int columna) {
         if (columna < 0 || columna >= taulell[0].length) {
             System.out.println("Columna fora de rang. Torna a intentar-ho.");
