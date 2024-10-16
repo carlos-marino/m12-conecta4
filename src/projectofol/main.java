@@ -17,91 +17,51 @@ public class main {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        int files, columnes;
+        do {
         System.out.print("Ingrese el número de files: ");
-        int files = scanner.nextInt();
+        files = scanner.nextInt();
+        } while (files < 4);
 
+        do {
         System.out.print("Ingrese el número de columnes: ");
-        int columnes = scanner.nextInt();
+        columnes = scanner.nextInt();
+        } while (columnes < 4);
+        
+        Taulell taulell = new Taulell(files, columnes);
+        taulell.imprimirTaulell();
 
-        char[][] taulell = new char[files][columnes];
 
-        inicialitzarTaulell(taulell);
-        imprimirTaulell(taulell);
+        Jugador jugadorX = new Jugador('X');
+        Jugador jugadorO = new Jugador('O');
+        Jugador jugadorActual = jugadorX;
 
         boolean jocEnMarxa = true;
-        char jugadorActual = 'X';
 
         while (jocEnMarxa) {
-            System.out.println("Torn del jugador " + jugadorActual);
+            System.out.println("Torn del jugador " + jugadorActual.getSimbol());
             int columna;
 
             do {
                 System.out.print("Introdueix una columna (1-" + columnes + "): ");
                 columna = scanner.nextInt() - 1;
-            } while (!columnaValida(taulell, columna));
+            } while (!taulell.columnaValida(columna));
 
-            colocarFitxa(taulell, columna, jugadorActual);
-            imprimirTaulell(taulell);
-        }
-        scanner.close();  
-    }
+            taulell.colocarFitxa(columna, jugadorActual.getSimbol());
+            taulell.imprimirTaulell();
 
-    public static void inicialitzarTaulell(char[][] taulell) {
-        for (int i = 0; i < taulell.length; i++) {
-            for (int j = 0; j < taulell[i].length; j++) {
-                taulell[i][j] = ' '; 
+            if (taulell.comprovarGuanyador(jugadorActual.getSimbol())) {
+                System.out.println("El jugador " + jugadorActual + " ha guanyat!");
+                jocEnMarxa = false;
+            } else if (taulell.taulerPle()) {
+                System.out.println("El joc ha acabat en empat!");
+                jocEnMarxa = false;
+            } else {
+                jugadorActual = (jugadorActual == jugadorX) ? jugadorO : jugadorX;
             }
         }
+
+        scanner.close(); 
     }
 
-    
-    public static void imprimirTaulell(char[][] taulell) {
-        System.out.println();
-
-        for (int i = 0; i < taulell.length; i++) { 
-            System.out.print(" " + (taulell.length - i) + " | "); 
-            for (int j = 0; j < taulell[i].length; j++) {
-                System.out.print(taulell[i][j] + " | ");
-            }
-            System.out.println();
-
-            System.out.print("   ");
-            for (int j = 0; j < taulell[i].length; j++) {
-                System.out.print("----");
-            }
-            System.out.println("-");
-        }
-
-        System.out.print("   ");
-        for (int j = 1; j <= taulell[0].length; j++) {
-            System.out.print("  " + j + " ");
-        }
-        System.out.println(); 
-    } 
-
-     
-    public static boolean columnaValida(char[][] taulell, int columna) {
-        if (columna < 0 || columna >= taulell[0].length) {
-            System.out.println("Columna fora de rang. Torna a intentar-ho.");
-            return false;
-        }
-
-        if (taulell[0][columna] != ' ') {
-            System.out.println("Columna plena. Torna a intentar-ho.");
-            return false;
-        }
-
-        return true;
-    }
-
-    public static void colocarFitxa(char[][] taulell, int columna, char jugador) {
-        for (int i = taulell.length - 1; i >= 0; i--) {
-            if (taulell[i][columna] == ' ') {
-                taulell[i][columna] = jugador; 
-                break;
-            }
-        }
-    }
-    
 }
